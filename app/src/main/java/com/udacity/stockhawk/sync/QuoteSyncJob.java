@@ -12,6 +12,7 @@ import android.net.NetworkInfo;
 import com.udacity.stockhawk.data.Contract;
 import com.udacity.stockhawk.data.PrefUtils;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -73,35 +74,40 @@ public final class QuoteSyncJob {
 
 
                 Stock stock = quotes.get(symbol);
-                StockQuote quote = stock.getQuote();
 
-                float price = quote.getPrice().floatValue();
-                float change = quote.getChange().floatValue();
-                float percentChange = quote.getChangeInPercent().floatValue();
-
-                // WARNING! Don't request historical data for a stock that doesn't exist!
-                // The request will hang forever X_x
-                List<HistoricalQuote> history = stock.getHistory(from, to, Interval.WEEKLY);
-
-                StringBuilder historyBuilder = new StringBuilder();
-
-                for (HistoricalQuote it : history) {
-                    historyBuilder.append(it.getDate().getTimeInMillis());
-                    historyBuilder.append(", ");
-                    historyBuilder.append(it.getClose());
-                    historyBuilder.append("\n");
+                if(stock.isValid()){
+                    StockQuote quote = stock.getQuote();
+    
+                    float price = quote.getPrice().floatValue();
+                    float change = quote.getChange().floatValue();
+                    float percentChange = quote.getChangeInPercent().floatValue();
+    
+                    // WARNING! Don't request historical data for a stock that doesn't exist!
+                    // The request will hang forever X_x
+                    Timber.d(stock.getName());
+                    //TODO temporary solution for filenot found if stock ticker is not proper for historical data!:
+                    try {
+                        ContentValues quoteCV = new ContentValues();
+                        quoteCV.put(Contract.Quote.COLUMN_SYMBOL, symbol);
+                        quoteCV.put(Contract.Quote.COLUMN_PRICE, price);
+                        quoteCV.put(Contract.Quote.COLUMN_PERCENTAGE_CHANGE, percentChange);
+                        quoteCV.put(Contract.Quote.COLUMN_ABSOLUTE_CHANGE, change);
+                        //TODO find tickers names and base on that use getHistory or not!
+                        List<HistoricalQuote> history = stock.getHistory(from, to, Interval.WEEKLY);
+                        StringBuilder historyBuilder = new StringBuilder();
+                        for (HistoricalQuote it : history) {
+                            historyBuilder.append(it.getDate().getTimeInMillis());
+                            historyBuilder.append(", ");
+                            historyBuilder.append(it.getClose());
+                            historyBuilder.append("\n");
+                        }
+                        quoteCV.put(Contract.Quote.COLUMN_HISTORY, historyBuilder.toString());
+                        quoteCVs.add(quoteCV);
+                    }catch(FileNotFoundException fnfex){
+                        
+                    }
                 }
-
-                ContentValues quoteCV = new ContentValues();
-                quoteCV.put(Contract.Quote.COLUMN_SYMBOL, symbol);
-                quoteCV.put(Contract.Quote.COLUMN_PRICE, price);
-                quoteCV.put(Contract.Quote.COLUMN_PERCENTAGE_CHANGE, percentChange);
-                quoteCV.put(Contract.Quote.COLUMN_ABSOLUTE_CHANGE, change);
-
-
-                quoteCV.put(Contract.Quote.COLUMN_HISTORY, historyBuilder.toString());
-
-                quoteCVs.add(quoteCV);
+                
 
             }
 
