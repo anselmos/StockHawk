@@ -4,6 +4,7 @@ import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.utils.EntryXComparator;
 import com.udacity.stockhawk.R;
 
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import timber.log.Timber;
@@ -55,6 +57,8 @@ public class ChartActivity extends AppCompatActivity {
                 entries.add(new Entry(x, y));
             }
         }
+        //Since entries might not be sorted by x, you may end-up with raising error of NegativeArraySizeException, so sorting:
+        Collections.sort(entries, new EntryXComparator());
         return entries;
     }
 }
