@@ -2,7 +2,7 @@ package com.udacity.stockhawk.sync;
 
 import com.udacity.stockhawk.data.Contract;
 import com.udacity.stockhawk.data.PrefUtils;
-import com.udacity.stockhawk.mocked.MockedHistoricalQueue;
+import com.udacity.stockhawk.data.MockedHistoricalQuote;
 
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
@@ -88,9 +88,6 @@ public final class QuoteSyncJob {
                 float change = quote.getChange().floatValue();
                 float percentChange = quote.getChangeInPercent().floatValue();
                 
-                // WARNING! Don't request historical data for a stock that doesn't exist!
-                // The request will hang forever X_x
-                Timber.d(stock.getName());
                 ContentValues quoteCV = new ContentValues();
                 quoteCV.put(Contract.Quote.COLUMN_SYMBOL, symbol);
                 quoteCV.put(Contract.Quote.COLUMN_PRICE, price);
@@ -100,7 +97,9 @@ public final class QuoteSyncJob {
                 try {
                     history = stock.getHistory(from, to, Interval.WEEKLY);
                 } catch (IOException ioexc) {
-                    history = new MockedHistoricalQueue().getMockHistoryData();
+                    //Hence Yahoo icharts does not want to work anymore - noone knows when this issue will be fixed
+                    //So I'm Mocking this Quotes
+                    history = new MockedHistoricalQuote().getMockHistoryData(stock.getSymbol());
                 }
                 StringBuilder historyBuilder = new StringBuilder();
                 for (HistoricalQuote it : history) {

@@ -1,4 +1,4 @@
-package com.udacity.stockhawk.mocked;
+package com.udacity.stockhawk.data;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
@@ -14,13 +14,13 @@ import yahoofinance.histquotes.HistoricalQuote;
 /**
  * Created by anselmos on 19.05.17.
  */
-public class MockedHistoricalQueue {
+public class MockedHistoricalQuote {
     
-    public List<HistoricalQuote> getMockHistoryData() {
+    public List<HistoricalQuote> getMockHistoryData(String symbol) {
         ArrayList<HistoricalQuote> output = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 25; i++) {
             HistoricalQuote randomQuote = new HistoricalQuote(
-                    this.symbol(),
+                    symbol,
                     this.calendar(),
                     this.decimal(),
                     this.decimal(),
@@ -34,13 +34,7 @@ public class MockedHistoricalQueue {
         return output;
     }
     
-    public String symbol() {
-        ArrayList<String> symbols = new ArrayList<>();
-        symbols.add("Name1");
-        symbols.add("Name2");
-        symbols.add("Name3");
-        return symbols.get(new Random().nextInt(symbols.size()));
-    }
+
     
     public Calendar calendar() {
         SimpleDateFormat dfDateTime = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.getDefault());
