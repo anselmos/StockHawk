@@ -1,10 +1,9 @@
 package com.udacity.stockhawk.data;
 
+import com.google.common.collect.ImmutableList;
 
 import android.net.Uri;
 import android.provider.BaseColumns;
-
-import com.google.common.collect.ImmutableList;
 
 public final class Contract {
 
