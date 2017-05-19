@@ -30,6 +30,9 @@ import yahoofinance.histquotes.Interval;
 import yahoofinance.quotes.stock.StockQuote;
 
 public final class QuoteSyncJob {
+    public final static String HISTORY_LINE_SPLITER = "\n";
+    
+    public final static String HISTORY_ROW_SPLITTER = ", ";
     
     private static final int ONE_OFF_ID = 2;
     
@@ -42,6 +45,8 @@ public final class QuoteSyncJob {
     private static final int PERIODIC_ID = 1;
     
     private static final int YEARS_OF_HISTORY = 2;
+    
+    
     
     private QuoteSyncJob() {
     }
@@ -104,9 +109,11 @@ public final class QuoteSyncJob {
                 StringBuilder historyBuilder = new StringBuilder();
                 for (HistoricalQuote it : history) {
                     historyBuilder.append(it.getDate().getTimeInMillis());
-                    historyBuilder.append(", ");
+                    
+                    historyBuilder.append(HISTORY_ROW_SPLITTER);
                     historyBuilder.append(it.getClose());
-                    historyBuilder.append("\n");
+                    
+                    historyBuilder.append(HISTORY_LINE_SPLITER);
                 }
                 quoteCV.put(Contract.Quote.COLUMN_HISTORY, historyBuilder.toString());
                 quoteCVs.add(quoteCV);

@@ -30,6 +30,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import timber.log.Timber;
 
+import static com.udacity.stockhawk.ui.ChartActivity.historyName;
 import static com.udacity.stockhawk.ui.ChartActivity.parcelName;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>,
@@ -50,11 +51,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     
 
     @Override
-    public void onClick(String symbol) {
+    public void onClick(String symbol, String history) {
         Timber.d("Symbol clicked: %s", symbol);
     
         Intent detailsIntent = new Intent(getApplicationContext(), ChartActivity.class);
         detailsIntent.putExtra(parcelName, symbol);
+        detailsIntent.putExtra(historyName, history);
         startActivity(detailsIntent);
     }
 

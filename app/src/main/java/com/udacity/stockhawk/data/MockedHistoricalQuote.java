@@ -18,7 +18,7 @@ public class MockedHistoricalQuote {
     
     public List<HistoricalQuote> getMockHistoryData(String symbol) {
         ArrayList<HistoricalQuote> output = new ArrayList<>();
-        for (int i = 0; i < 25; i++) {
+        for (int i = 0; i<= 10; i++) {
             HistoricalQuote randomQuote = new HistoricalQuote(
                     symbol,
                     this.calendar(),
@@ -38,7 +38,7 @@ public class MockedHistoricalQuote {
     
     public Calendar calendar() {
         SimpleDateFormat dfDateTime = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.getDefault());
-        int year = new Random().nextInt(1900);
+        int year = 2017;
         int month = new Random().nextInt(11);
         int hour = new Random().nextInt(23);
         int min = new Random().nextInt(59);
