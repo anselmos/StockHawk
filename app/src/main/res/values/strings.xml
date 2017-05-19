@@ -37,4 +37,5 @@
     <string name="error_default_text">Error message</string>
     <string name="plusButton">Adds new stock symbol!</string>
     <string name="symbol_contentDescription">Moves to History of Stock</string>
+    <string name="StockWidgetLabel">StockQoutes Widget</string>
 </resources>
