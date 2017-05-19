@@ -29,11 +29,12 @@
         android:layout_margin="16dp"
         android:onClick="button"
         android:src="@drawable/fab_plus"
+        android:contentDescription="@string/plusButton"
         app:backgroundTint="@color/material_blue_500"
-        app:borderWidth="0dp"
-        app:elevation="6dp"
+        app:borderWidth="@dimen/fab_borderWidth"
+        app:elevation="@dimen/fab_elevation"
         app:fabSize="normal"
-        app:pressedTranslationZ="12dp" />
+        app:pressedTranslationZ="@dimen/fab_pressedTranslationZ" />
 
     <TextView
         android:id="@+id/error"
@@ -42,5 +43,5 @@
         android:layout_gravity="center"
         android:textAppearance="@android:style/TextAppearance.Medium"
         android:visibility="gone"
-        tools:text="Error message" />
+        tools:text="@string/error_default_text" />
 </merge>
