@@ -11,4 +11,8 @@
     <dimen name="dialog_stock_marginRight">4dp</dimen>
     <dimen name="dialog_stock_marginTop">16dp</dimen>
     <dimen name="linearLayout_default_width_for_priceandchange">0dp</dimen>
+    <dimen name="widget_minWidth">146dp</dimen>
+    <dimen name="widget_minHeight">72dp</dimen>
+    <dimen name="widget_item_symbol_width">4dp</dimen>
+    <dimen name="widget_item_price_width">4dp</dimen>
 </resources>

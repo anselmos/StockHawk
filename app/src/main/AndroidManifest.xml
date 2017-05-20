@@ -43,7 +43,7 @@
         <receiver
             android:icon="@drawable/ic_dollar"
             android:label="@string/StockWidgetLabel"
-            android:name=".ui.StockWidgetProvider" >
+            android:name=".widget.StockWidgetProvider" >
             <intent-filter >
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>

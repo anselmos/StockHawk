@@ -6,15 +6,10 @@
     android:layout_margin="8dip"
     android:background="@drawable/myshape" >
 
-    <TextView
-        android:id="@+id/update"
-        style="@android:style/TextAppearance.Medium"
+    <ListView
+        android:id="@+id/widget_list_items"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:gravity="center_horizontal|center_vertical"
-        android:layout_margin="4dip"
-        android:text="Static Text" >
-    </TextView>
+        android:layout_height="wrap_content">
+    </ListView>
 
 </LinearLayout>
