@@ -29,8 +29,8 @@ public class StockProvider extends ContentProvider {
         UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
         matcher.addURI(Contract.AUTHORITY, Contract.PATH_QUOTE, QUOTE);
         matcher.addURI(Contract.AUTHORITY, Contract.PATH_QUOTE_WITH_SYMBOL, QUOTE_FOR_SYMBOL);
-        matcher.addURI(Contract.AUTHORITY, Contract.PATH_QUOTE_WITH_SYMBOL, QUOTE_HISTORY);
-        matcher.addURI(Contract.AUTHORITY, Contract.PATH_QUOTE_DELETE, QUOTE_DELETE);
+        //matcher.addURI(Contract.AUTHORITY, Contract.PATH_QUOTE_WITH_SYMBOL, QUOTE_HISTORY);
+        //matcher.addURI(Contract.AUTHORITY, Contract.PATH_QUOTE_DELETE, QUOTE_DELETE);
         return matcher;
     }
     

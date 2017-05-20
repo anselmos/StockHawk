@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Looper;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -153,7 +154,9 @@ public final class QuoteSyncJob {
     }
     
     public static synchronized void syncImmediately(Context context) {
-        
+        if (Looper.getMainLooper().getThread() == Thread.currentThread()) {
+            Timber.d("OnMainUI");
+        }
         ConnectivityManager cm =
                 (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = cm.getActiveNetworkInfo();
