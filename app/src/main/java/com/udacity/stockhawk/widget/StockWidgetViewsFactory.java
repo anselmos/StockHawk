@@ -1,8 +1,10 @@
 package com.udacity.stockhawk.widget;
 
 import com.udacity.stockhawk.R;
+import com.udacity.stockhawk.data.Contract;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
@@ -13,6 +15,7 @@ import timber.log.Timber;
  */
 public class StockWidgetViewsFactory implements RemoteViewsService.RemoteViewsFactory {
     protected Context context = null;
+    protected Cursor data;
     
     StockWidgetViewsFactory(Context context){
         this.context = context;
@@ -25,26 +28,33 @@ public class StockWidgetViewsFactory implements RemoteViewsService.RemoteViewsFa
     @Override
     public void onDataSetChanged() {
         Timber.d("OnDatasetChanged!!!!");
-        
+        this.data = this.context.getContentResolver().query(Contract.Quote.URI, null, null, null, null);
     }
     
     @Override
     public void onDestroy() {
+        if(this.data != null && !this.data.isClosed()){
+            this.data.close();
+            this.data = null;
+        }
         
     }
     
     @Override
     public int getCount() {
         //TODO remove this hardcoded value!
-        return 2;
+        return this.data != null? this.data.getCount() : 0;
     }
     
     @Override
     public RemoteViews getViewAt(final int position) {
-        RemoteViews remoteViews = new RemoteViews(this.context.getPackageName(), R.layout.widget_item_layout);
-        remoteViews.setTextViewText(R.id.widget_item_symbol, "AAAPT");
-        remoteViews.setTextViewText(R.id.widget_item_price, "3");
-        return remoteViews;
+        if(this.data != null && this.data.moveToPosition(position)) {
+            RemoteViews remoteViews = new RemoteViews(this.context.getPackageName(), R.layout.widget_item_layout);
+            remoteViews.setTextViewText(R.id.widget_item_symbol, this.data.getString(Contract.Quote.POSITION_SYMBOL));
+            remoteViews.setTextViewText(R.id.widget_item_price, this.data.getString(Contract.Quote.POSITION_PRICE));
+            return remoteViews;
+        }
+        return null;
     }
     
     @Override
@@ -54,7 +64,7 @@ public class StockWidgetViewsFactory implements RemoteViewsService.RemoteViewsFa
     
     @Override
     public int getViewTypeCount() {
-        return 0;
+        return 1;
     }
     
     @Override
@@ -64,6 +74,6 @@ public class StockWidgetViewsFactory implements RemoteViewsService.RemoteViewsFa
     
     @Override
     public boolean hasStableIds() {
-        return false;
+        return true;
     }
 }

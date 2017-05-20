@@ -32,13 +32,19 @@
         <provider
             android:name=".data.StockProvider"
             android:authorities="com.udacity.stockhawk"
-            android:exported="false" />
+            android:exported="true" />
 
         <service
             android:name=".sync.QuoteJobService"
             android:enabled="true"
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <service android:name=".widget.StockWidgetViewsService"
+            android:exported="true"
+            android:permission="android.permission.BIND_REMOTEVIEWS"
+            >
+        </service>
 
         <receiver
             android:icon="@drawable/ic_dollar"

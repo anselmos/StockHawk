@@ -30,13 +30,15 @@ import yahoofinance.histquotes.Interval;
 import yahoofinance.quotes.stock.StockQuote;
 
 public final class QuoteSyncJob {
+
+    
     public final static String HISTORY_LINE_SPLITER = "\n";
     
     public final static String HISTORY_ROW_SPLITTER = ", ";
     
     private static final int ONE_OFF_ID = 2;
     
-    private static final String ACTION_DATA_UPDATED = "com.udacity.stockhawk.ACTION_DATA_UPDATED";
+    public static final String ACTION_DATA_UPDATED = "com.udacity.stockhawk.ACTION_DATA_UPDATED";
     
     private static final int PERIOD = 300000;
     
