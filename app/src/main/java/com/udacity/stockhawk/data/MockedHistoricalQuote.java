@@ -37,7 +37,6 @@ public class MockedHistoricalQuote {
 
     
     public Calendar calendar() {
-        SimpleDateFormat dfDateTime = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.getDefault());
         int year = 2017;
         int month = new Random().nextInt(11);
         int hour = new Random().nextInt(23);

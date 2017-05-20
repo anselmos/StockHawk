@@ -104,7 +104,8 @@ public final class QuoteSyncJob {
                 try {
                     history = stock.getHistory(from, to, Interval.WEEKLY);
                 } catch (IOException ioexc) {
-                    //Hence Yahoo icharts does not want to work anymore - noone knows when this issue will be fixed
+                    //Hence Yahoo icharts does not want to work anymore - no-one knows when
+                    // and if this issue will be fixed
                     //So I'm Mocking this Quotes
                     history = new MockedHistoricalQuote().getMockHistoryData(stock.getSymbol());
                 }

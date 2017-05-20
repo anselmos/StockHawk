@@ -27,7 +27,7 @@ public class StockWidgetViewsFactory implements RemoteViewsService.RemoteViewsFa
     
     @Override
     public void onDataSetChanged() {
-        Timber.d("OnDatasetChanged!!!!");
+        Timber.d("OnDatasetChanged");
         this.data = this.context.getContentResolver().query(Contract.Quote.URI, null, null, null, null);
     }
     
@@ -42,7 +42,6 @@ public class StockWidgetViewsFactory implements RemoteViewsService.RemoteViewsFa
     
     @Override
     public int getCount() {
-        //TODO remove this hardcoded value!
         return this.data != null? this.data.getCount() : 0;
     }
     

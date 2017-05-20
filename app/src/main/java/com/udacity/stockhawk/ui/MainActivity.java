@@ -1,5 +1,10 @@
 package com.udacity.stockhawk.ui;
 
+import com.udacity.stockhawk.R;
+import com.udacity.stockhawk.data.Contract;
+import com.udacity.stockhawk.data.PrefUtils;
+import com.udacity.stockhawk.sync.QuoteSyncJob;
+
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -17,14 +22,8 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.udacity.stockhawk.R;
-import com.udacity.stockhawk.data.Contract;
-import com.udacity.stockhawk.data.PrefUtils;
-import com.udacity.stockhawk.sync.QuoteSyncJob;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

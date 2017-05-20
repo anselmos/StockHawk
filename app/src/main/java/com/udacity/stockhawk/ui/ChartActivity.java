@@ -57,7 +57,8 @@ public class ChartActivity extends AppCompatActivity {
                 entries.add(new Entry(x, y));
             }
         }
-        //Since entries might not be sorted by x, you may end-up with raising error of NegativeArraySizeException, so sorting:
+        //Since entries might not be sorted by x,
+        // you may end-up with raising error of NegativeArraySizeException, so sorting:
         Collections.sort(entries, new EntryXComparator());
         return entries;
     }
