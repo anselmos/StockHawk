@@ -9,12 +9,16 @@
         android:layout_width="@dimen/widget_item_symbol_width"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:paddingStart="@dimen/widget_item_symbol_paddingStart"
+        android:paddingEnd="@dimen/widget_item_symbol_paddingEnd"
         />
     <TextView
         android:id="@+id/widget_item_price"
         android:layout_width="@dimen/widget_item_price_width"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:paddingStart="@dimen/widget_item_price_paddingStart"
+        android:paddingEnd="@dimen/widget_item_price_paddingEnd"
         />
 
 </LinearLayout>

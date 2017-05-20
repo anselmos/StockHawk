@@ -15,4 +15,8 @@
     <dimen name="widget_minHeight">72dp</dimen>
     <dimen name="widget_item_symbol_width">5dp</dimen>
     <dimen name="widget_item_price_width">5dp</dimen>
+    <dimen name="widget_item_symbol_paddingStart">2dp</dimen>
+    <dimen name="widget_item_symbol_paddingEnd">2dp</dimen>
+    <dimen name="widget_item_price_paddingStart">2dp</dimen>
+    <dimen name="widget_item_price_paddingEnd">2dp</dimen>
 </resources>
