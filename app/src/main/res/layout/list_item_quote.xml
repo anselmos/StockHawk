@@ -5,8 +5,8 @@
     android:layout_height="?android:attr/listPreferredItemHeight"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:paddingLeft="@dimen/linearLayout_main_list_item_quote_padding"
-    android:paddingRight="@dimen/linearLayout_main_list_item_quote_padding">
+    android:paddingStart="@dimen/linearLayout_main_list_item_quote_padding"
+    android:paddingEnd="@dimen/linearLayout_main_list_item_quote_padding">
 
     <TextView
         android:id="@+id/symbol"
