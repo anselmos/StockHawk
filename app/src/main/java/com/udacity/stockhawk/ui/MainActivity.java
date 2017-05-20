@@ -29,6 +29,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import timber.log.Timber;
 
+import static com.udacity.stockhawk.sync.QuoteSyncJob.ACTION_DATA_UPDATED;
 import static com.udacity.stockhawk.ui.ChartActivity.historyName;
 import static com.udacity.stockhawk.ui.ChartActivity.parcelName;
 
@@ -88,6 +89,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 String symbol = adapter.getSymbolAtPosition(viewHolder.getAdapterPosition());
                 PrefUtils.removeStock(MainActivity.this, symbol);
                 getContentResolver().delete(Contract.Quote.makeUriForStock(symbol), null, null);
+    
+                Intent dataUpdatedIntent = new Intent(ACTION_DATA_UPDATED);
+                getApplicationContext().sendBroadcast(dataUpdatedIntent);
             }
         }).attachToRecyclerView(stockRecyclerView);
 
@@ -138,6 +142,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
             PrefUtils.addStock(this, symbol);
             QuoteSyncJob.syncImmediately(this);
+    
+            Intent dataUpdatedIntent = new Intent(ACTION_DATA_UPDATED);
+            getApplicationContext().sendBroadcast(dataUpdatedIntent);
+            
         }
     }
 
@@ -168,6 +176,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
 
     private void setDisplayModeMenuItemIcon(MenuItem item) {
+        Intent dataUpdatedIntent = new Intent(ACTION_DATA_UPDATED);
+        getApplicationContext().sendBroadcast(dataUpdatedIntent);
         if (PrefUtils.getDisplayMode(this)
                 .equals(getString(R.string.pref_display_mode_absolute_key))) {
             item.setIcon(R.drawable.ic_percentage);
