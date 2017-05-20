@@ -13,7 +13,7 @@ public final class Contract {
     public static final String PATH_QUOTE_HISTORY = "quote-history/*";
     public static final String PATH_QUOTE_DELETE = "quote-delete";
     private static final Uri BASE_URI = Uri.parse("content://" + AUTHORITY);
-
+    public static final Uri URI_DELETE = BASE_URI.buildUpon().appendPath(PATH_QUOTE_DELETE).build();
     private Contract() {
     }
 

@@ -142,6 +142,13 @@ public class StockProvider extends ContentProvider {
                         selectionArgs
                 );
                 break;
+            case QUOTE_DELETE:
+                rowsDeleted = db.delete(
+                        Contract.Quote.TABLE_NAME,
+                        Contract.Quote.COLUMN_SYMBOL + "=?",
+                        selectionArgs
+                );
+                break;
             default:
                 throw new UnsupportedOperationException("Unknown URI:" + uri);
         }
@@ -150,6 +157,8 @@ public class StockProvider extends ContentProvider {
             Context context = getContext();
             if (context != null) {
                 context.getContentResolver().notifyChange(uri, null);
+                Intent dataUpdatedIntent = new Intent(ACTION_DATA_UPDATED);
+                context.sendBroadcast(dataUpdatedIntent);
             }
         }
         
